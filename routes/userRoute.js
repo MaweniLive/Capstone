@@ -69,7 +69,7 @@ router.put("/:id", (req, res) => {
       `UPDATE users SET email='${email}', password='${password}', 
       fullname='${fullname}', 
       userRole='${userRole}', phone='${phone}'
-       WHERE user_id = ${req.params.id}`,
+       WHERE user_id = ${req.params.id};`,
       (err, result) => {
         if (err) throw err;
         res.send(result);

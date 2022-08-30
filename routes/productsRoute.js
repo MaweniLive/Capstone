@@ -20,7 +20,7 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
   try {
     con.query(
-      `SELECT * FROM products WHERE product_id = ${req.params.id}`,
+      `SELECT * FROM products WHERE product_id = ${req.params.id};`,
       (err, result) => {
         if (err) throw err;
         res.send(result);
@@ -34,15 +34,24 @@ router.get("/:id", (req, res) => {
 
 //Insert a new product
 router.post("/", (req, res) => {
-  const { name, category, description, imgURL, price, user_id, quantity } =
-    req.body;
+  const {
+    name,
+    category,
+    description,
+    made,
+    imgURL,
+    price,
+    user_id,
+    quantity,
+  } 
+  = req.body;
   try {
     con.query(
-      `INSERT INTO products (name, category, description, imgURL, price, 
+      `INSERT INTO products (name, category, description, made, imgURL, price, 
         user_id, quantity) 
       values 
       ('${name}', '${category}', '${price}', 
-      '${description}','${imgURL}', 
+      '${description}','${made}','${imgURL}', '${price}', 
       '${user_id}', '${quantity}') `,
       (err, result) => {
         if (err) throw err;
@@ -51,6 +60,52 @@ router.post("/", (req, res) => {
     );
   } catch (error) {
     console.log(error);
+  }
+});
+
+router.put("/:id", (req, res) => {
+  const { 
+    name, 
+    category, 
+    description, 
+    Made,
+    imgURL, 
+    price, 
+    user_id, 
+    quantity 
+  } =
+    req.body;
+
+  try {
+    con.query(
+      `UPDATE users SET name='${name}', category='${category}',Made='${Made}',
+      description='${description}', 
+      imgURL='${imgURL}', price='${price}',user_id='${user_id}',quantity='${quantity}'
+       WHERE product_id = ${req.params.id};`,
+      (err, result) => {
+        if (err) throw err;
+        res.send(result);
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
+  }
+});
+
+//Delete a single product
+router.delete("/:id", (req, res) => {
+  try {
+    con.query(
+      `DELETE FROM users WHERE product_id=${req.params.id};`,
+      (err, result) => {
+        if (err) throw err;
+        res.send(result);
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
   }
 });
 
