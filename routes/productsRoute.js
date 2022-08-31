@@ -52,7 +52,7 @@ router.post("/", (req, res) => {
       values 
       ('${name}', '${category}', '${price}', 
       '${description}','${made}','${imgURL}', '${price}', 
-      '${user_id}', '${quantity}') `,
+      '${user_id}', '${quantity}'); `,
       (err, result) => {
         if (err) throw err;
         res.send(result);
