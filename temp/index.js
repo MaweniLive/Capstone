@@ -7,6 +7,3 @@ const bodyParser = require("body-parser");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get("/", function (req, res) {
-  res.sendFile(_dirname + "/" + "index.html");
-});

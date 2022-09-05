@@ -2,15 +2,10 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-app.set("port", process.env.PORT || 3232);
 app.use(express.json());
 app.use(cors());
 
 app.use(express.static("public"));
-
-app.get("/", (req, res) => {
-  res.sendFile(_dirname + "/" + "index.html");
-});
 
 app.listen(app.get("port"), () => {
   console.log(`Listening for calls on port ${app.get("port")}`);
