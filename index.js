@@ -1,15 +1,18 @@
 const express = require("express");
 const cors = require("cors");
 
-const app = express();
-app.use(express.json());
-app.use(cors());
+// Configure Server
+const app = express(); // Initialize express as an app variable
+app.set("port", process.env.PORT || 6969); // Set the port
+app.use(express.json()); // Enable the server to handle JSON requests
+app.use(cors()); // Dont let local development give errors
 
-app.use(express.static("public"));
+
 app.get("/", (req, res) => {
-  res.json({msg: "Welcome"});
+  res.json({ msg: "Welcome" });
 });
 
+// Set up server to start listening for requests
 app.listen(app.get("port"), () => {
   console.log(`Listening for calls on port ${app.get("port")}`);
   console.log("Press Ctrl+C to exit server");
