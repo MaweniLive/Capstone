@@ -7,9 +7,14 @@ app.set("port", process.env.PORT || 6969); // Set the port
 app.use(express.json()); // Enable the server to handle JSON requests
 app.use(cors()); // Dont let local development give errors
 
+// Configure Server
+app.set("port", process.env.PORT || 6969); // Set the port
+app.use(express.json()); // Enable the server to handle JSON requests
+app.use(cors()); // Dont let local development give errors
+app.use(express.static("public")); // Static
 
 app.get("/", (req, res) => {
-  res.json({ msg: "Welcome" });
+  res.sendFile(__dirname + "/" + "users.html");
 });
 
 // Set up server to start listening for requests
